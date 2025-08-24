@@ -1,0 +1,24 @@
+# Системные файлы
+*.pyc
+__pycache__/
+*.pyo
+
+# Среды разработки
+.env
+.venv/
+venv/
+env/
+ENV/
+*.egg-info/
+dist/
+build/
+
+# Модули
+*.egg
+*.whl
+*.pytest_cache/
+*.coverage
+
+# Другие
+*.log
+*.sqlite3
