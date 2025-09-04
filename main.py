@@ -2,7 +2,7 @@ from fastapi import FastAPI, HTTPException
 from celery.result import AsyncResult
 import redis
 import json
-from tasks import calculate_task
+from tasks import calculate_task, calculate_new
 from celery_app import celery_app
 
 app = FastAPI(title="Simple Celery API")
@@ -12,6 +12,16 @@ app = FastAPI(title="Simple Celery API")
 async def start_calculation(number: int):
     """Запуск фонового расчета"""
     task = calculate_task.delay(number)
+    return {
+        "task_id": task.id,
+        "message": "Расчет запущен",
+        "number": number
+    }
+
+@app.post("/start_calculation_2/{number}")
+async def start_calculation_2(number: int):
+    """Запуск фонового расчета"""
+    task = calculate_new.delay(number)
     return {
         "task_id": task.id,
         "message": "Расчет запущен",
