@@ -17,3 +17,14 @@ def calculate_task(self, number: int):
         'result': result,
         'status': 'complete'
     }
+
+
+@celery_app.task(bind=True)
+def calculate_new(self, number: int):
+    time.sleep(3)
+    result = number * 0.2 / number
+    return {
+        'number': number,
+        'result': result,
+        'status': 'complete'
+    }
